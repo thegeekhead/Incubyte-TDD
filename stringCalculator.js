@@ -1,10 +1,11 @@
 function Add(numbers) {
-    if (numbers === "") {
-        return 0;
-    }
 
-    const numArray = numbers.split(",").map(Number);
-    return numArray.reduce((sum, num) => sum + num, 0);
+    return numbers
+        .split(",")
+        .filter(n => n !== "")
+        .map(Number)
+        .reduce((sum, num) => sum + num, 0);
+
 }
 
 module.exports = Add;
