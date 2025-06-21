@@ -1,5 +1,5 @@
-function escapeRegex(char) {
-    return char.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+function escapeRegex(str) {
+    return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
 
 function Add(numbers) {
@@ -7,8 +7,17 @@ function Add(numbers) {
 
     if (numbers.startsWith("//")) {
         const parts = numbers.split("\n");
-        const customDelimiter = escapeRegex(parts[0].slice(2));
-        delimiter = new RegExp(customDelimiter);
+        const delimiterDeclaration = parts[0].slice(2);
+
+        if (delimiterDeclaration.startsWith("[")) {
+            const match = delimiterDeclaration.match(/\[(.*)\]/);
+            if (match) {
+                delimiter = new RegExp(escapeRegex(match[1]));
+            }
+        } else {
+            delimiter = new RegExp(escapeRegex(delimiterDeclaration));
+        }
+
         numbers = parts[1];
     }
 
@@ -18,7 +27,6 @@ function Add(numbers) {
         .map(Number);
 
     const negatives = numArray.filter(n => n < 0);
-
     if (negatives.length > 0) {
         throw new Error(`negatives not allowed: ${negatives.join(",")}`);
     }

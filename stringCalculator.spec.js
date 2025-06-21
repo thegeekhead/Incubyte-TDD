@@ -55,3 +55,7 @@ assertEqual(Add("2,1001"), 2, "Ignores number greater than 1000");
 assertEqual(Add("1000,1"), 1001, "Includes 1000 but ignores >1000");
 assertEqual(Add("500,600,1001"), 1100, "Sum includes only numbers ≤ 1000");
 assertEqual(Add("//;\n1;1001;2"), 3, "Works with custom delimiter and ignores >1000");
+
+assertEqual(Add("//[***]\n1***2***3"), 6, "Supports multi-character delimiter '***'");
+assertEqual(Add("//[abc]\n2abc3abc4"), 9, "Supports multi-character delimiter 'abc'");
+assertEqual(Add("//[!!]\n1!!2!!1001"), 3, "Ignores >1000 with multi-char delimiter");
