@@ -50,3 +50,8 @@ assertThrows(
     "negatives not allowed: -4,-9",
     "Throws exception listing all negative numbers"
 );
+
+assertEqual(Add("2,1001"), 2, "Ignores number greater than 1000");
+assertEqual(Add("1000,1"), 1001, "Includes 1000 but ignores >1000");
+assertEqual(Add("500,600,1001"), 1100, "Sum includes only numbers ≤ 1000");
+assertEqual(Add("//;\n1;1001;2"), 3, "Works with custom delimiter and ignores >1000");
