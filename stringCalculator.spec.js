@@ -9,3 +9,5 @@ function assertEqual(actual, expected, description) {
 }
 
 assertEqual(Add(""), 0, "Returns 0 for empty string");
+assertEqual(Add("1"), 1, "Returns 1 for input '1'");
+assertEqual(Add("56"), 56, "Returns 56 for input '56'");
