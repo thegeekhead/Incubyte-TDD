@@ -1,6 +1,7 @@
 function Add(numbers) {
 
     return numbers
+        .replace(/\n/g, ",")
         .split(",")
         .filter(n => n !== "")
         .map(Number)
