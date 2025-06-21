@@ -10,10 +10,9 @@ function Add(numbers) {
         const delimiterDeclaration = parts[0].slice(2);
 
         if (delimiterDeclaration.startsWith("[")) {
-            const match = delimiterDeclaration.match(/\[(.*)\]/);
-            if (match) {
-                delimiter = new RegExp(escapeRegex(match[1]));
-            }
+            const matches = [...delimiterDeclaration.matchAll(/\[([^\]]+)\]/g)];
+            const delimiters = matches.map(m => escapeRegex(m[1]));
+            delimiter = new RegExp(delimiters.join("|"));
         } else {
             delimiter = new RegExp(escapeRegex(delimiterDeclaration));
         }
