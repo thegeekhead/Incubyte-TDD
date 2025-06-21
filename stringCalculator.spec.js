@@ -8,6 +8,20 @@ function assertEqual(actual, expected, description) {
     }
 }
 
+
+function assertThrows(fn, expectedMessage, description) {
+    try {
+        fn();
+        console.error(`❌ ${description}: Expected exception but none was thrown`);
+    } catch (error) {
+        if (error.message === expectedMessage) {
+            console.log(`✅ ${description}`);
+        } else {
+            console.error(`❌ ${description}: Expected "${expectedMessage}", but got "${error.message}"`);
+        }
+    }
+}
+
 assertEqual(Add(""), 0, "Returns 0 for empty string");
 assertEqual(Add("1"), 1, "Returns 1 for input '1'");
 assertEqual(Add("56"), 56, "Returns 56 for input '56'");
@@ -24,3 +38,15 @@ assertEqual(Add("7\n8,9"), 24, "Mix of newline and commas");
 assertEqual(Add("//;\n1;2"), 3, "Supports custom delimiter ';'");
 assertEqual(Add("//|\n4|5|6"), 15, "Supports custom delimiter '|'");
 assertEqual(Add("//,\n7,8,9"), 24, "Handles custom comma (overriding default)");
+
+assertThrows(
+    () => Add("-1"),
+    "negatives not allowed: -1",
+    "Throws exception for single negative number"
+);
+
+assertThrows(
+    () => Add("2,-4,3,-9"),
+    "negatives not allowed: -4,-9",
+    "Throws exception listing all negative numbers"
+);

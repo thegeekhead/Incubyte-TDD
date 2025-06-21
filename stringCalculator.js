@@ -12,11 +12,18 @@ function Add(numbers) {
         numbers = parts[1];
     }
 
-    return numbers
+    const numArray = numbers
         .split(delimiter)
         .filter(n => n !== "")
-        .map(Number)
-        .reduce((sum, num) => sum + num, 0);
+        .map(Number);
+
+    const negatives = numArray.filter(n => n < 0);
+
+    if (negatives.length > 0) {
+        throw new Error(`negatives not allowed: ${negatives.join(",")}`);
+    }
+
+    return numArray.reduce((sum, num) => sum + num, 0);
 }
 
 module.exports = Add;
