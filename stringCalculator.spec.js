@@ -64,3 +64,7 @@ assertEqual(Add("//[*][%]\n1*2%3"), 6, "Handles multiple single-char delimiters 
 assertEqual(Add("//[***][%%]\n1***2%%3"), 6, "Handles multiple multi-char delimiters");
 assertEqual(Add("//[@@][##]\n4@@5##6"), 15, "Handles multi-char symbols as delimiters");
 assertEqual(Add("//[!!][??]\n1001!!2??3"), 5, "Ignores >1000 with multiple delimiters");
+
+assertEqual(Add("//[***][%%%]\n1***2%%%3"), 6, "Handles multiple multi-char delimiters");
+assertEqual(Add("//[!!][##][@@]\n4!!5##6@@1"), 16, "Handles 3 custom multi-char delimiters");
+assertEqual(Add("//[ab][cd][efg]\n1ab2cd3efg4"), 10, "Handles alpha multi-char delimiters");
