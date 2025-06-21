@@ -20,3 +20,7 @@ assertEqual(Add("100,200,300,400"), 1000, "Handles 4 large numbers");
 assertEqual(Add("1\n2,3"), 6, "Supports newline and comma as delimiters");
 assertEqual(Add("4\n5\n6"), 15, "Handles only newlines");
 assertEqual(Add("7\n8,9"), 24, "Mix of newline and commas");
+
+assertEqual(Add("//;\n1;2"), 3, "Supports custom delimiter ';'");
+assertEqual(Add("//|\n4|5|6"), 15, "Supports custom delimiter '|'");
+assertEqual(Add("//,\n7,8,9"), 24, "Handles custom comma (overriding default)");
